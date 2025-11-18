@@ -5,7 +5,6 @@ import 'package:pas_mobile_11pplg1_36/bindings/login_binding.dart';
 import 'package:pas_mobile_11pplg1_36/bindings/produk_binding.dart';
 import 'package:pas_mobile_11pplg1_36/bindings/register_binding.dart';
 import 'package:pas_mobile_11pplg1_36/bindings/splash_binding.dart';
-import 'package:pas_mobile_11pplg1_36/pages/favorite_page.dart';
 import 'package:pas_mobile_11pplg1_36/pages/login_page.dart';
 import 'package:pas_mobile_11pplg1_36/pages/dashboard_page.dart';
 import 'package:pas_mobile_11pplg1_36/pages/produk_page.dart';

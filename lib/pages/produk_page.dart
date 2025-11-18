@@ -11,9 +11,18 @@ class ProdukPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white, 
       appBar: AppBar(
-        title: const Text('Produk'),
-        centerTitle: true,
+        title: const Text(
+          'Product List',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+            fontSize: 22,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0, 
       ),
       body: Obx(
         () {
@@ -25,27 +34,21 @@ class ProdukPage extends StatelessWidget {
           }
           return RefreshIndicator(
             onRefresh: () => controller.fetchProduk(),
-            child: GridView.builder(
-              padding: const EdgeInsets.all(8),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 8,
-                crossAxisSpacing: 8,
-                childAspectRatio: 0.65,
-              ),
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               itemCount: controller.produkList.length,
               itemBuilder: (context, index) {
                 final produk = controller.produkList[index];
-                return Obx(
-                  () {
-                    final isBookmarked = controller.bookmarkedIds.contains(produk.id);
-                    return ProductCard(
-                      produk: produk,
-                      isBookmarked: isBookmarked,
-                      onToggleBookmark: () => controller.toggleBookmark(produk),
-                    );
-                  },
-                );
+                return Obx(() {
+                  final isBookmarked = controller.bookmarkedIds.contains(produk.id);
+                  return ProductCard(
+                    produk: produk,
+                    isBookmarked: isBookmarked,
+                    onToggleBookmark: () {
+                      controller.toggleBookmark(produk);
+                    } 
+                  );
+                });
               },
             ),
           );

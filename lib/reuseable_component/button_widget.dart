@@ -31,16 +31,17 @@ class Frame4Button extends StatelessWidget {
           backgroundColor: color,
           elevation: elevation,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
           ),
         ),
         child: Text(
           text,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
+          style: textStyle ?? 
+            const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
         ),
       ),
     );

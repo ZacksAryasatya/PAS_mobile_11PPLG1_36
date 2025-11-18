@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -23,11 +22,11 @@ class RegisterController extends GetxController {
 		final username = usernameController.text.trim();
 		final password = passwordController.text.trim();
 		if (fullname.isEmpty || email.isEmpty || username.isEmpty || password.isEmpty) {
-			Get.snackbar('Error', 'Semua field harus diisi', snackPosition: SnackPosition.BOTTOM);
+			Get.snackbar('Error', 'Semua field harus diisi', snackPosition: SnackPosition.TOP);
 			return false;
 		}
 		if (!email.contains('@')) {
-			Get.snackbar('Error', 'Email tidak valid', snackPosition: SnackPosition.BOTTOM);
+			Get.snackbar('Error', 'Email tidak valid', snackPosition: SnackPosition.TOP);
 			return false;
 		}
 		return true;
@@ -53,20 +52,20 @@ class RegisterController extends GetxController {
 					await pref.setString('username', usernameController.text.trim());
 					await pref.setString('email', emailController.text.trim());
 
-					Get.snackbar('Berhasil', rm.message, snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.green, colorText: Colors.white);
+					Get.snackbar('Berhasil', rm.message, snackPosition: SnackPosition.TOP, backgroundColor: Colors.green, colorText: Colors.white);
 					fullNameController.clear();
 					emailController.clear();
 					usernameController.clear();
 					passwordController.clear();
 					Get.offAllNamed(AppRoutes.login);
 				} else {
-					Get.snackbar('Gagal', rm.message, snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.yellow, colorText: Colors.black);
+					Get.snackbar('Gagal', rm.message, snackPosition: SnackPosition.TOP, backgroundColor: Colors.yellow, colorText: Colors.black);
 				}
 			} else {
-				Get.snackbar('Gagal', 'Register gagal: status ${res.statusCode}', snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red, colorText: Colors.white);
+				Get.snackbar('Gagal', 'Register gagal: status ${res.statusCode}', snackPosition: SnackPosition.TOP, backgroundColor: Colors.red, colorText: Colors.white);
 			}
 		} catch (e) {
-			Get.snackbar('Error', 'Koneksi gagal', snackPosition: SnackPosition.BOTTOM, backgroundColor: Colors.red, colorText: Colors.white);
+			Get.snackbar('Error', 'Koneksi gagal', snackPosition: SnackPosition.TOP, backgroundColor: Colors.red, colorText: Colors.white);
 			print('Error register: $e');
 		} finally {
 			isLoading.value = false;

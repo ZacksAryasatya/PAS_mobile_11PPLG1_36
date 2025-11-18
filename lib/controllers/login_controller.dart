@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -33,22 +31,12 @@ class LoginController extends GetxController{
         if (loginModel.status == true) {
           final pref = await SharedPreferences.getInstance();
           pref.setString("token", loginModel.token.toString());
-
-          Get.snackbar(
-            "Auth",
-            loginModel.message,
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.green,
-            colorText: Colors.white,
-          );
-
           Get.offNamed(AppRoutes.dashboard);
         } else {
           Get.snackbar(
             "Auth",
             loginModel.message,
-            snackPosition: SnackPosition.BOTTOM,
-            backgroundColor: Colors.yellow,
+            snackPosition: SnackPosition.TOP,
             colorText: Colors.black,
           );
         }
@@ -56,20 +44,17 @@ class LoginController extends GetxController{
         Get.snackbar(
           "Auth",
           "Login Gagal: Status ${res.statusCode}",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.red,
-          colorText: Colors.white,
+          snackPosition: SnackPosition.TOP,
+          colorText: Colors.black,
         );
       } 
     } catch (e) {
       Get.snackbar(
         "Auth",
         "Koneksi Gagal",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+        colorText: Colors.black,
       );
-      print("Error Login: $e");
     } finally {
       isLoading.value = false;
     }
@@ -85,7 +70,7 @@ class LoginController extends GetxController{
       password.clear();
       Get.offAllNamed(AppRoutes.login);
     } catch (e) {
-      Get.snackbar('Error', 'Gagal logout', snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'Gagal logout', snackPosition: SnackPosition.TOP);
     }
   }
 }
