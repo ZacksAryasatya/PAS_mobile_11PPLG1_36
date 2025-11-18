@@ -15,27 +15,46 @@ class SplashScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center, 
             children: [
-               const Icon(Icons.shopping_bag, size: 80, color: Color(0xFF42B6E7)),
-              const SizedBox(height: 16),
-              const Text(
-                "Turn your tasks into achievements.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              const SizedBox(width: double.infinity),
+              const Spacer(flex: 2), 
+              const Icon(
+                Icons.shopping_bag_outlined,
+                size: 80,
+                color: Color(0xFF42B6E7),
               ),
-
-              const SizedBox(height: 12),
+              const SizedBox(height: 24),
               const Text(
-                "Turn your tasks into achievements.\nWrite it down, check it off, and feel good every day.",
+                "PAS Mobile",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF333333),
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(
+                "Cintai usus mu,\n minum yakult tiap hari.",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
+                  fontSize: 15,
+                  color: Colors.grey[600],
                   height: 1.4,
                 ),
               ),
-              const SizedBox(height: 32),
+              const Spacer(flex: 1), 
+              const CircularProgressIndicator(
+                color: Color(0xFF42B6E7),
+              ),
+              SizedBox(height: 20),
+              Text(
+                "Memuat...",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey[500],
+                ),
+              ),
             ],
           ),
         ),

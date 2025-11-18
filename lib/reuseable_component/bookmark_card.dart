@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:pas_mobile_11pplg1_36/models/produk_model.dart';
 
-class ProductCard extends StatelessWidget {
-  final ProductModel produk;
-  final bool isBookmarked;
-  final VoidCallback onToggleBookmark;
+class FavoriteCard extends StatelessWidget {
+  final Map<String, dynamic> favorite;
+  final VoidCallback onDelete;
 
-  const ProductCard({
+  const FavoriteCard({
     super.key,
-    required this.produk,
-    required this.isBookmarked,
-    required this.onToggleBookmark,
+    required this.favorite,
+    required this.onDelete,
   });
 
   @override
@@ -21,7 +18,7 @@ class ProductCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [ 
+        boxShadow: [
           BoxShadow(
             color: Colors.grey.withValues(alpha: 0.15),
             blurRadius: 10,
@@ -35,32 +32,38 @@ class ProductCard extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
             child: Image.network(
-              produk.image,
+              favorite['image'] ?? '',
               width: 90,
               height: 90,
               fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) => Container(
+                width: 90,
+                height: 90,
+                color: Colors.grey[100],
+                child: Icon(Icons.broken_image_outlined, size: 30, color: Colors.grey[400]),
+              ),
             ),
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: SizedBox( 
+            child: SizedBox(
               height: 90,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    produk.title,
+                    favorite['title'] ?? 'Nama Produk',
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontWeight: FontWeight.w500, 
+                      fontWeight: FontWeight.w500,
                       fontSize: 15,
                       color: Color(0xFF333333),
                     ),
                   ),
                   const Spacer(), 
                   Text(
-                    '\$${produk.price.toStringAsFixed(2)}',
+                    '\$${(favorite['price'] as num? ?? 0).toStringAsFixed(2)}',
                     style: const TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
@@ -73,10 +76,10 @@ class ProductCard extends StatelessWidget {
                       const Icon(Icons.star_rate_rounded, size: 16, color: Colors.amber),
                       const SizedBox(width: 4),
                       Text(
-                        "${produk.rating.rate} (${produk.rating.count} ulasan)",
+                        "${favorite['rating']} (${favorite['rating_count']} ulasan)",
                         style: TextStyle(
                           fontSize: 12, 
-                          color: Colors.grey[700], 
+                          color: Colors.grey[700],
                         ),
                       ),
                     ],
@@ -86,16 +89,16 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Column(
-            mainAxisAlignment: MainAxisAlignment.start, 
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               IconButton(
                 visualDensity: VisualDensity.compact,
                 padding: EdgeInsets.zero,
-                onPressed: onToggleBookmark,
+                onPressed: onDelete, 
                 icon: Icon(
-                  isBookmarked ? Icons.bookmark : Icons.bookmark_outline,
-                  color: isBookmarked ? Colors.blue : Colors.grey[500],
-                  size: 24,
+                  Icons.close, 
+                  color: Colors.grey[500],
+                  size: 20,
                 ),
               ),
             ],

@@ -1,4 +1,3 @@
-// database_helper.dart - adjusted for storing bookmarked products
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -42,7 +41,6 @@ class DBHelper {
 
   Future<int> insertBookmark(Map<String, dynamic> item) async {
     final client = await db;
-    // Remove id if present
     item.remove('id');
     return await client.insert('bookmarks', item, conflictAlgorithm: ConflictAlgorithm.replace);
   }
